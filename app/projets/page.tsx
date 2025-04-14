@@ -32,7 +32,7 @@ export default function Projets() {
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        const reposResponse = await fetch("https://api.github.com/users/rrous/repos");
+        const reposResponse = await fetch("https://api.github.com/users/EZ3ki33l/repos");
         if (!reposResponse.ok) {
           throw new Error("Erreur lors de la récupération des repositories");
         }

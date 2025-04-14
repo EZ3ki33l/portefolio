@@ -3,14 +3,6 @@
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 
-interface GitHubRepo {
-  name: string;
-  description: string | null;
-  html_url: string;
-  stargazers_count: number;
-  languages_url: string;
-}
-
 interface GitHubLanguages {
   [key: string]: number;
 }
@@ -20,12 +12,16 @@ interface Language {
   percentage: number;
 }
 
-interface RepoWithLanguages extends GitHubRepo {
-  languages: Language[];
+interface GitHubRepo {
+  name: string;
+  description: string | null;
+  html_url: string;
+  stargazers_count: number;
+  languages_url: string;
 }
 
-interface LanguageData {
-  [key: string]: number;
+interface RepoWithLanguages extends GitHubRepo {
+  languages: Language[];
 }
 
 export default function Projets() {
@@ -36,14 +32,12 @@ export default function Projets() {
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        // Récupérer tous les repositories
-        const reposResponse = await fetch('https://api.github.com/users/EZ3ki33l/repos');
+        const reposResponse = await fetch("https://api.github.com/users/rrous/repos");
         if (!reposResponse.ok) {
-          throw new Error('Erreur lors de la récupération des projets');
+          throw new Error("Erreur lors de la récupération des repositories");
         }
-        const reposData = await reposResponse.json();
 
-        // Pour chaque repository, récupérer les langages
+        const reposData = await reposResponse.json();
         const reposWithLanguages = await Promise.all(
           reposData.map(async (repo: GitHubRepo) => {
             const languagesResponse = await fetch(repo.languages_url);
@@ -64,31 +58,16 @@ export default function Projets() {
         );
 
         setRepos(reposWithLanguages);
-      } catch (err) {
-        setError('Impossible de charger les projets');
-        console.error(err);
-      } finally {
+        setLoading(false);
+      } catch (error) {
+        console.error("Erreur:", error);
+        setError("Erreur lors de la récupération des projets");
         setLoading(false);
       }
     };
 
     fetchRepos();
   }, []);
-
-  const fetchLanguageStats = async (repoName: string): Promise<LanguageData> => {
-    try {
-      const response = await fetch(
-        `https://api.github.com/repos/rrous/${repoName}/languages`
-      );
-      if (!response.ok) {
-        throw new Error("Erreur lors de la récupération des statistiques de langage");
-      }
-      return await response.json();
-    } catch (error) {
-      console.error("Erreur:", error);
-      return {};
-    }
-  };
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">

@@ -9,19 +9,28 @@ interface GitHubRepo {
   html_url: string;
   stargazers_count: number;
   languages_url: string;
-  languages: {
-    name: string;
-    percentage: number;
-  }[];
 }
 
 interface GitHubLanguages {
   [key: string]: number;
 }
 
+interface Language {
+  name: string;
+  percentage: number;
+}
+
+interface RepoWithLanguages extends GitHubRepo {
+  languages: Language[];
+}
+
+interface LanguageData {
+  [key: string]: number;
+}
+
 export default function Projets() {
   const [loading, setLoading] = useState(true);
-  const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [repos, setRepos] = useState<RepoWithLanguages[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -36,7 +45,7 @@ export default function Projets() {
 
         // Pour chaque repository, récupérer les langages
         const reposWithLanguages = await Promise.all(
-          reposData.map(async (repo: any) => {
+          reposData.map(async (repo: GitHubRepo) => {
             const languagesResponse = await fetch(repo.languages_url);
             const languagesData: GitHubLanguages = await languagesResponse.json();
             
@@ -48,12 +57,9 @@ export default function Projets() {
             }));
 
             return {
-              name: repo.name,
-              description: repo.description,
-              html_url: repo.html_url,
-              stargazers_count: repo.stargazers_count,
+              ...repo,
               languages
-            };
+            } as RepoWithLanguages;
           })
         );
 
@@ -68,6 +74,21 @@ export default function Projets() {
 
     fetchRepos();
   }, []);
+
+  const fetchLanguageStats = async (repoName: string): Promise<LanguageData> => {
+    try {
+      const response = await fetch(
+        `https://api.github.com/repos/rrous/${repoName}/languages`
+      );
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des statistiques de langage");
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("Erreur:", error);
+      return {};
+    }
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">

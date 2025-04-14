@@ -6,12 +6,17 @@ export default function Home() {
       <Navbar />
       <div className="max-w-6xl mx-auto px-4 py-12">
         <section className="text-center py-20">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            Bienvenue sur mon Portfolio
+          <h1 className="text-4xl font-bold text-gray-900">
+            Bienvenue sur mon portfolio
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Je suis un développeur passionné par la création d'applications web modernes
-            et innovantes. Découvrez mon parcours, mes compétences et mes projets.
+          <p className="mt-4 text-xl text-gray-600">
+            Je suis un développeur Front-End passionné par la création d&apos;interfaces utilisateur modernes et performantes.
+          </p>
+          <p className="mt-2 text-xl text-gray-600">
+            Spécialisé en Angular et React/Next.js, je m&apos;efforce de créer des expériences utilisateur exceptionnelles.
+          </p>
+          <p className="mt-2 text-xl text-gray-600">
+            Découvrez mes projets et mon parcours professionnel.
           </p>
           <div className="flex justify-center space-x-4">
             <a
@@ -42,14 +47,14 @@ export default function Home() {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Expérience</h2>
             <p className="text-gray-600">
-              Plusieurs années d'expérience dans le développement web moderne
-              et la création d'applications performantes.
+              Plusieurs années d&apos;expérience dans le développement web moderne
+              et la création d&apos;applications performantes.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Contact</h2>
             <p className="text-gray-600">
-              N'hésitez pas à me contacter pour discuter de vos projets
+              N&apos;hésitez pas à me contacter pour discuter de vos projets
               ou pour toute opportunité de collaboration.
             </p>
           </div>

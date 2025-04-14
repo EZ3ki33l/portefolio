@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 import SkillBar from "../components/SkillBar";
 import Modal from "../components/Modal";
@@ -21,12 +22,14 @@ export default function CV() {
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-blue-500 to-blue-400 animate-border-rotate"></div>
                 <div className="absolute inset-[3px] rounded-full bg-white"></div>
                 <div className="relative w-full h-full rounded-full overflow-hidden">
-                  <img
+                  <Image
                     src="/profile.png"
                     alt="Romain ROUSSET"
+                    width={160}
+                    height={160}
                     className="w-full h-full object-cover"
                     style={{ imageRendering: "crisp-edges" }}
-                    loading="eager"
+                    priority
                   />
                 </div>
               </div>
@@ -34,9 +37,10 @@ export default function CV() {
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
               Romain ROUSSET
             </h1>
-            <p className="text-xl text-gray-600">
-              Développeur Front-End Junior
-            </p>
+            <div className="text-sm text-gray-600">
+              <p>Développeur Front-End spécialisé en Angular et React/Next.js</p>
+              <p>Passionné par la création d&apos;interfaces utilisateur modernes et performantes</p>
+            </div>
             <div className="mt-4 flex justify-center space-x-6 text-sm">
               <a
                 href="mailto:r.rousset31@gmail.com"
@@ -129,7 +133,7 @@ export default function CV() {
                 <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 shadow-sm">
                   <p className="text-gray-700 leading-relaxed">
                     Je suis un développeur front-end passionné par la création
-                    d'interfaces utilisateur modernes et intuitives. Je mets à
+                    d&apos;interfaces utilisateur modernes et intuitives. Je mets à
                     profit mes compétences en HTML, CSS et JavaScript pour
                     concevoir des sites web et des applications web performantes
                     et esthétiques.

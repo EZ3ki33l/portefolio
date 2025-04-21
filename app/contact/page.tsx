@@ -84,7 +84,7 @@ export default function ContactPage() {
                 >
                   <option value="" disabled>Motif de contact *</option>
                   <option value="projet">Proposition de projet</option>
-                  <option value="emploi">Offre d'emploi</option>
+                  <option value="emploi">Offre d&apos;emploi</option>
                   <option value="collaboration">Collaboration</option>
                   <option value="autre">Autre</option>
                 </select>

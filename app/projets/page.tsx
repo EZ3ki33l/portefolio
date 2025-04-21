@@ -5,7 +5,6 @@ import Image from "next/image";
 import Navbar from "../components/Navbar";
 import { CyberpunkClock } from "../components/ui/cyberpunk-clock";
 import { GlitchBackground } from "../components/ui/glitch-background";
-import { CyberpunkButton } from "../components/ui/cyberpunk-button";
 import useEmblaCarousel from "embla-carousel-react";
 
 interface GitHubLanguages {

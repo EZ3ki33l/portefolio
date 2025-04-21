@@ -2,13 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { CyberpunkButton } from "./ui/cyberpunk-button";
 import { CyberpunkGlitch } from "./ui/cyberpunk-glitch";
 import { useState } from "react";
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuClick = () => {

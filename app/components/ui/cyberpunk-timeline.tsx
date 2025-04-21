@@ -1,12 +1,11 @@
 "use client";
 
 import {
-  useMotionValueEvent,
   useScroll,
   useTransform,
   motion,
 } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Experience } from "@/app/data/experiences";
 import { Formation } from "@/app/data/formations";
 

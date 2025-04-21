@@ -11,7 +11,6 @@ import { CyberpunkClock } from "../components/ui/cyberpunk-clock";
 import { GlitchBackground } from "../components/ui/glitch-background";
 import { CyberpunkButton } from "../components/ui/cyberpunk-button";
 import { CyberpunkTimeline, CyberpunkTimelineFormation } from "../components/ui/cyberpunk-timeline";
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function CV() {

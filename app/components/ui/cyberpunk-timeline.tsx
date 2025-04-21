@@ -24,12 +24,9 @@ export function CyberpunkTimelineFormation({ formations }: CyberpunkTimelineForm
     offset: ["start end", "end start"],
   });
 
-  const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-
   return (
     <div ref={containerRef} className="relative max-w-7xl mx-auto pb-20">
-      {formations.map((formation, index) => (
+      {formations.map((formation) => (
         <div
           key={formation.id}
           className="flex justify-start pt-10 md:pt-20 md:gap-8"
@@ -70,10 +67,6 @@ export function CyberpunkTimelineFormation({ formations }: CyberpunkTimelineForm
         className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-[#038C8C] to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
       >
         <motion.div
-          style={{
-            height,
-            opacity,
-          }}
           className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-[#038C8C] to-transparent from-[0%] rounded-full"
         />
       </div>
@@ -88,9 +81,6 @@ export function CyberpunkTimeline({ experiences }: CyberpunkTimelineProps) {
     offset: ["start end", "end start"],
   });
 
-  const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-
   const formatPeriod = (period: string) => {
     const [datePart, durationPart] = period.split(" · ");
     const [startDate, endDate] = datePart.split(" - ");
@@ -99,7 +89,7 @@ export function CyberpunkTimeline({ experiences }: CyberpunkTimelineProps) {
 
   return (
     <div ref={containerRef} className="relative max-w-7xl mx-auto pb-20">
-      {experiences.map((experience, index) => {
+      {experiences.map((experience) => {
         const { startDate, endDate, duration } = formatPeriod(experience.period);
         return (
           <motion.div

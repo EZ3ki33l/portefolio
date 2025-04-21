@@ -2,7 +2,6 @@
 
 import {
   useScroll,
-  useTransform,
   motion,
 } from "framer-motion";
 import React, { useRef } from "react";
@@ -19,10 +18,6 @@ interface CyberpunkTimelineFormationProps {
 
 export function CyberpunkTimelineFormation({ formations }: CyberpunkTimelineFormationProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
 
   return (
     <div ref={containerRef} className="relative max-w-7xl mx-auto pb-20">
@@ -76,10 +71,6 @@ export function CyberpunkTimelineFormation({ formations }: CyberpunkTimelineForm
 
 export function CyberpunkTimeline({ experiences }: CyberpunkTimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
 
   const formatPeriod = (period: string) => {
     const [datePart, durationPart] = period.split(" · ");

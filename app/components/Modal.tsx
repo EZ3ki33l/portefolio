@@ -33,15 +33,15 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
 
   return (
     <div 
-      className="fixed inset-0 z-50 overflow-y-auto"
+      className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       onClick={handleClickOutside}
     >
       <div className="fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity" />
-      <div className="fixed inset-0 z-10 overflow-y-auto">
+      <div className="fixed inset-0 z-10 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <div 
             ref={modalRef}
-            className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6"
+            className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[90vw] sm:p-4"
           >
             <div className="absolute right-0 top-0 pr-4 pt-4">
               <button
@@ -57,8 +57,8 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
             </div>
             <div className="sm:flex sm:items-start">
               <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                <h3 className="text-2xl font-semibold leading-6 text-gray-900 mb-6">{title}</h3>
-                <div className="mt-2">{children}</div>
+                <h3 className="text-4xl font-semibold leading-6 text-gray-900 text-center py-4 mb-6">{title}</h3>
+                <div className="mt-2 overflow-y-auto max-h-[80vh] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">{children}</div>
               </div>
             </div>
           </div>

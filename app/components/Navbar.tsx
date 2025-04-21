@@ -1,56 +1,73 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { CyberpunkButton } from "./ui/cyberpunk-button";
+import { CyberpunkGlitch } from "./ui/cyberpunk-glitch";
+import { useState } from "react";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <nav className="bg-white shadow-lg">
-      <div className="max-w-6xl mx-auto px-4">
+    <nav className="bg-transparent absolute top-0 left-0 right-0 z-10">
+      <div className="mx-auto px-16 py-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex space-x-7">
-            <div className="flex items-center">
-              <Link href="/" className="text-xl font-bold text-gray-800">
-                Mon Portfolio
-              </Link>
-            </div>
-            <div className="hidden md:flex items-center space-x-4">
-              <Link
-                href="/"
-                className={`py-2 px-3 rounded-md text-sm font-medium ${
-                  pathname === '/'
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                Accueil
-              </Link>
-              <Link
-                href="/cv"
-                className={`py-2 px-3 rounded-md text-sm font-medium ${
-                  pathname === '/cv'
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                CV
-              </Link>
-              <Link
-                href="/projets"
-                className={`py-2 px-3 rounded-md text-sm font-medium ${
-                  pathname === '/projets'
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                Projets
-              </Link>
-            </div>
+          <Link href="/" className="text-xl font-bold text-gray-800">
+            <Image
+              src="/images/logo.png"
+              alt="logo"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+          </Link>
+          <div className="relative">
+            <CyberpunkButton onClick={handleMenuClick}>
+              MENU
+            </CyberpunkButton>
+            {isMenuOpen && (
+              <div className="cyberpunk-menu">
+                <CyberpunkGlitch />
+                <Link
+                  href="/"
+                  className="cyberpunk-menu-link"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Accueil
+                </Link>
+                <Link
+                  href="/cv"
+                  className="cyberpunk-menu-link"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  CV
+                </Link>
+                <Link
+                  href="/projets"
+                  className="cyberpunk-menu-link"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Projets
+                </Link>
+                <Link
+                  href="/contact"
+                  className="cyberpunk-menu-link"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Contact
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </nav>
   );
-} 
+}

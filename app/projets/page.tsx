@@ -6,6 +6,9 @@ import Navbar from "../components/Navbar";
 import { CyberpunkClock } from "../components/ui/cyberpunk-clock";
 import { GlitchBackground } from "../components/ui/glitch-background";
 import useEmblaCarousel from "embla-carousel-react";
+import SkillBar from "../components/SkillBar";
+import { motion, useTransform, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import CyberpunkTooltip from "../components/CyberpunkTooltip";
 
 interface GitHubLanguages {
   [key: string]: number;
@@ -25,7 +28,14 @@ interface GitHubRepo {
   image?: string;
 }
 
-interface RepoWithLanguages extends GitHubRepo {
+interface RepoWithLanguages {
+  id: number;
+  name: string;
+  description: string | null;
+  html_url: string;
+  stargazers_count: number;
+  languages_url: string;
+  image?: string;
   languages: Language[];
 }
 
@@ -33,11 +43,21 @@ export default function Projets() {
   const [loading, setLoading] = useState(true);
   const [repos, setRepos] = useState<RepoWithLanguages[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+  const [hoveredRepoId, setHoveredRepoId] = useState<number | null>(null);
+  const springConfig = { stiffness: 100, damping: 5 };
+  const x = useMotionValue(0);
+  const rotate = useSpring(useTransform(x, [-100, 100], [-45, 45]), springConfig);
+  const translateX = useSpring(useTransform(x, [-100, 100], [-50, 50]), springConfig);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     slidesToScroll: 1,
-    containScroll: "trimSnaps"
+    containScroll: "trimSnaps",
   });
+
+  const handleMouseMove = (event: any) => {
+    const halfWidth = event.target.offsetWidth / 2;
+    x.set(event.nativeEvent.offsetX - halfWidth);
+  };
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -59,7 +79,7 @@ export default function Projets() {
 
         const reposData = await reposResponse.json();
         const reposWithLanguages = await Promise.all(
-          reposData.map(async (repo: GitHubRepo) => {
+          reposData.map(async (repo: any, index: number) => {
             const languagesResponse = await fetch(repo.languages_url);
             const languagesData: GitHubLanguages =
               await languagesResponse.json();
@@ -76,7 +96,13 @@ export default function Projets() {
             );
 
             return {
-              ...repo,
+              id: index,
+              name: repo.name,
+              description: repo.description,
+              html_url: repo.html_url,
+              stargazers_count: repo.stargazers_count,
+              languages_url: repo.languages_url,
+              image: repo.image,
               languages,
             } as RepoWithLanguages;
           })
@@ -112,8 +138,8 @@ export default function Projets() {
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
             {repos.map((repo, index) => (
-              <div 
-                key={`carousel-${repo.name}-${index}`} 
+              <div
+                key={`carousel-${repo.name}-${index}`}
                 className="flex-[0_0_calc(100%/3)] min-w-0 p-2"
               >
                 {renderProjectCard(repo)}
@@ -125,16 +151,36 @@ export default function Projets() {
           className="absolute top-1/2 -left-4 -translate-y-1/2 bg-[#038C8C] text-white p-2 rounded-full hover:bg-[#BF0404] transition-colors z-10"
           onClick={scrollPrev}
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
         </button>
         <button
           className="absolute top-1/2 -right-4 -translate-y-1/2 bg-[#038C8C] text-white p-2 rounded-full hover:bg-[#BF0404] transition-colors z-10"
           onClick={scrollNext}
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </button>
       </div>
@@ -142,53 +188,73 @@ export default function Projets() {
   };
 
   const renderProjectCard = (repo: RepoWithLanguages) => (
-    <div className="bg-white border-2 border-[#025959] rounded-xl p-6 shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-      <h2 className="text-xl font-semibold text-[#038C8C] mb-4">
-        <a
-          href={repo.html_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-[#BF0404] transition-colors"
-        >
-          {repo.name.toUpperCase()}
-        </a>
-      </h2>
+    <div className="bg-white border-2 border-[#025959] rounded-xl p-6 shadow-lg transform hover:scale-[1.02] transition-transform duration-300 h-[450px] flex flex-col">
+      <div className="h-[10%] flex items-center justify-center">
+        <h2 className="text-2xl font-semibold text-[#038C8C] w-full text-center">
+          <a
+            href={repo.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[#BF0404] transition-colors"
+          >
+            {repo.name.toUpperCase()}
+          </a>
+        </h2>
+      </div>
       
-      <div className="relative w-full h-36 mb-4 rounded-lg overflow-hidden flex items-center justify-center bg-gray-50">
-        <Image
-          src={repo.image || "/images/logo.png"}
-          alt={repo.name}
-          width={200}
-          height={200}
-          className="object-contain"
-        />
+      <div className="h-[25%] mb-3">
+        <div className="relative w-full h-full rounded-lg overflow-hidden flex items-center justify-center bg-gray-50">
+          <Image
+            src={repo.image || "/images/logo.png"}
+            alt={repo.name}
+            width={180}
+            height={180}
+            className="object-contain w-full h-full"
+          />
+        </div>
       </div>
 
-      <p className="text-[#038C8C] mb-4">
-        {repo.description || "Pas de description"}
-      </p>
+      <div 
+        className="h-[15%] relative group mb-3"
+        onMouseEnter={() => setHoveredRepoId(repo.id)}
+        onMouseLeave={() => setHoveredRepoId(null)}
+      >
+        <p className="text-[#038C8C] text-base text-center line-clamp-2">
+          {repo.description || "Pas de description"}
+        </p>
+        <CyberpunkTooltip
+          content={repo.description || "Pas de description"}
+          isVisible={hoveredRepoId === repo.id}
+          onMouseMove={handleMouseMove}
+        />
+      </div>
       
-      <div className="space-y-2 mb-4">
-        <h3 className="text-sm font-medium text-[#038C8C]">
+      <div className="h-[50%]">
+        <h3 className="text-lg font-medium text-[#038C8C] mb-2">
           LANGAGES UTILISÉS :
         </h3>
-        {repo.languages.map((lang) => (
-          <div key={lang.name} className="space-y-1">
-            <div className="flex justify-between text-xs">
-              <span className="text-[#038C8C]">{lang.name}</span>
-              <span className="text-[#BF0404]">
-                {lang.percentage}%
-              </span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5">
-              <div
-                className="bg-[#038C8C] h-1.5 rounded-full transition-all duration-500"
-                style={{ width: `${lang.percentage}%` }}
-              />
-            </div>
-          </div>
-        ))}
+        <div className="overflow-y-auto max-h-[calc(100%-2rem)] pr-2">
+          {repo.languages.map((lang) => (
+            <SkillBar key={lang.name} skill={lang.name} level={lang.percentage} />
+          ))}
+        </div>
       </div>
+      <style jsx global>{`
+        @keyframes pulse {
+          0% {
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0.6;
+          }
+          50% {
+            transform: translate(-50%, -50%) scale(1.2);
+            opacity: 1;
+          }
+          100% {
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0.6;
+          }
+        }
+      `}</style>
     </div>
   );
 
@@ -198,21 +264,21 @@ export default function Projets() {
         <GlitchBackground />
         <Navbar />
         <CyberpunkClock position="bottom-right" className="mr-6" />
-        <div className="h-[calc(100%-80px)] p-8 flex items-center">
-          <div className="max-w-6xl mx-auto w-full flex flex-col items-center">
-            <h1 className="text-4xl font-bold text-[#038C8C] mb-6 text-center relative">
-              <span className="relative z-10">MES PROJETS</span>
-              <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-[#BF0404]"></span>
+        <section className="h-[calc(100%-80px)] p-8">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-4xl font-bold mb-6 text-center">
+              <div className="page-title text-center">
+                <span className="page-title-gradient">MES PROJETS</span>
+              </div>
             </h1>
-
             <div className="text-center max-w-2xl mx-auto mb-8">
-              <p className="text-lg text-[#038C8C]">
+              <p className="text-base text-[#038C8C]">
                 Voici quelques-uns de mes projets. Cliquez sur les titres pour
                 voir le code source, et découvrez les technologies utilisées
                 dans chaque projet.
               </p>
             </div>
-            
+
             {loading ? (
               <div className="text-center">
                 <p className="text-[#038C8C]">Chargement des projets...</p>
@@ -222,12 +288,10 @@ export default function Projets() {
                 <p>{error}</p>
               </div>
             ) : (
-              <div className="w-full">
-                {renderProjects()}
-              </div>
+              <div className="w-full">{renderProjects()}</div>
             )}
           </div>
-        </div>
+        </section>
       </div>
     </main>
   );

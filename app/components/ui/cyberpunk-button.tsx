@@ -6,6 +6,7 @@ interface CyberpunkButtonProps {
   onClick?: () => void;
   variant?: 'default' | 'rounded';
   size?: 'default' | 'large' | 'small' | 'extra-small';
+  disabled?: boolean;
 }
 
 export function CyberpunkButton({ 
@@ -13,7 +14,8 @@ export function CyberpunkButton({
   className = '', 
   onClick,
   variant = 'default',
-  size = 'default'
+  size = 'default',
+  disabled = false
 }: CyberpunkButtonProps) {
   const sizeClasses = {
     default: 'px-4 py-2 text-base',
@@ -24,8 +26,9 @@ export function CyberpunkButton({
 
   return (
     <button 
-      className={`cyberpunk-button ${variant === 'rounded' ? 'cyberpunk-button-rounded' : ''} ${sizeClasses[size]} ${className}`}
+      className={`cyberpunk-button ${variant === 'rounded' ? 'cyberpunk-button-rounded' : ''} ${sizeClasses[size]} ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       onClick={onClick}
+      disabled={disabled}
     >
       <span className="cyberpunk-button-text">{children}</span>
       <span className="cyberpunk-button-glow"></span>

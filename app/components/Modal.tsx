@@ -43,11 +43,14 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
             ref={modalRef}
             className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[90vw] sm:p-4"
           >
-            <div className="absolute right-0 top-0 pr-4 pt-4">
+            <div className="absolute right-0 top-0 pr-4 pt-4 z-50">
               <button
                 type="button"
-                className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none"
-                onClick={onClose}
+                className="rounded-md bg-white text-[#BF0404] hover:text-[#038C8C] focus:outline-none transition-colors duration-200"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onClose();
+                }}
               >
                 <span className="sr-only">Fermer</span>
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
@@ -57,7 +60,10 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
             </div>
             <div className="sm:flex sm:items-start">
               <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                <h3 className="text-4xl font-semibold leading-6 text-gray-900 text-center py-4 mb-6">{title}</h3>
+                <h3 className="text-4xl font-bold text-[#038C8C] text-center py-4 mb-6 relative">
+                  <span className="relative z-10">Mon Parcours Professionnel</span>
+                  <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-[#BF0404]"></span>
+                </h3>
                 <div className="mt-2 overflow-y-auto max-h-[80vh] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">{children}</div>
               </div>
             </div>

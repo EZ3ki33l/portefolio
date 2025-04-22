@@ -13,6 +13,15 @@ import { CyberpunkButton } from "../components/ui/cyberpunk-button";
 import { CyberpunkTimeline, CyberpunkTimelineFormation } from "../components/ui/cyberpunk-timeline";
 import Link from "next/link";
 
+/**
+ * The CV component renders a portfolio page for Romain Rousset, showcasing his skills,
+ * professional experiences, and educational background. It includes a navbar, a clock,
+ * and sections for profile information, skills, education (formation), and work experience.
+ * The component uses various custom components like GlitchBackground, CyberpunkClock,
+ * CyberpunkButton, CyberpunkTimeline, and CyberpunkTimelineFormation for styling and functionality.
+ * A modal is used to display all professional experiences when triggered.
+ */
+
 export default function CV() {
   const [showExperiences, setShowExperiences] = useState(false);
 
@@ -32,20 +41,23 @@ export default function CV() {
                     <div className="absolute inset-[3px] rounded-full bg-white"></div>
                     <div className="relative w-full h-full rounded-full overflow-hidden">
                       <Image
-                        src="/profile.png"
+                        src="/images/profile.png"
                         alt="Romain ROUSSET"
                         width={192}
                         height={192}
-                        className="w-full h-full object-cover"
-                        style={{ imageRendering: "crisp-edges" }}
+                        className="w-full h-full object-cover brightness-110"
+                        style={{ 
+                          imageRendering: "crisp-edges",
+                          objectPosition: "center 30%"
+                        }}
                         priority
                       />
                     </div>
                   </div>
                 </div>
 
-                <h1 className="text-5xl md:text-6xl font-bold text-[#038C8C] mb-4 relative">
-                  <span className="relative z-10">Romain ROUSSET</span>
+                <h1 className="text-5xl md:text-6xl font-bold mb-4 relative">
+                  <span className="page-title-gradient">Romain ROUSSET</span>
                   <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-[#BF0404]"></span>
                 </h1>
 
@@ -244,7 +256,12 @@ export default function CV() {
                     Voir plus
                   </CyberpunkButton>
                 </div>
-                <CyberpunkTimeline experiences={experiences} />
+                <CyberpunkTimeline experiences={experiences.slice(0, 3)} />
+                <div className="flex justify-center -mt-7 pb-3">
+                  <CyberpunkButton variant="rounded" size="extra-small" onClick={() => setShowExperiences(true)}>
+                    Voir toutes mes expériences
+                  </CyberpunkButton>
+                </div>
               </section>
             </div>
           </div>

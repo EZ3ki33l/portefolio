@@ -28,11 +28,11 @@ export default function SkillBar({ skill, level }: SkillBarProps) {
 
   useEffect(() => {
     const generateBubbles = () => {
-      const newBubbles = Array.from({ length: 15 }, (_, i) => ({
+      const newBubbles = Array.from({ length: 10 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: Math.random() * 4 + 2,
+        size: Math.random() * 3 + 1,
         color: i % 2 === 0 ? '#038C8C' : '#BF0404'
       }));
       setBubbles(newBubbles);
@@ -44,12 +44,12 @@ export default function SkillBar({ skill, level }: SkillBarProps) {
   }, [level]);
 
   return (
-    <div className="mb-4">
+    <div className="mb-2">
       <div className="flex justify-between mb-1">
-        <span className="text-[#025959] font-medium">{skill}</span>
-        <span className="text-[#BF0404] font-medium">{Math.round(progress)}%</span>
+        <span className="text-[#025959] text-xs font-medium">{skill}</span>
+        <span className="text-[#BF0404] text-xs font-medium">{Math.round(progress)}%</span>
       </div>
-      <div className="w-full bg-[#025959] rounded-full h-2.5 overflow-hidden relative">
+      <div className="w-full bg-[#025959] rounded-full h-1.5 overflow-hidden relative">
         <div className="absolute inset-0">
           {bubbles.map((bubble) => (
             <div
@@ -70,7 +70,7 @@ export default function SkillBar({ skill, level }: SkillBarProps) {
           ))}
         </div>
         <div
-          className="bg-[#038C8C] h-2.5 rounded-full transition-all duration-300 ease-out absolute"
+          className="bg-[#038C8C] h-1.5 rounded-full transition-all duration-300 ease-out absolute"
           style={{ width: `${progress}%` }}
         />
       </div>

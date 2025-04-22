@@ -14,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-transparent absolute top-0 left-0 right-0 z-10">
+    <nav className="bg-transparent absolute top-0 left-0 right-0 z-[100]">
       <div className="mx-auto px-16 py-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="text-xl font-bold text-gray-800">
@@ -60,6 +60,13 @@ export default function Navbar() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Contact
+                </Link>
+                <Link
+                  href="/confidentialite"
+                  className="cyberpunk-menu-link"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Confidentialité
                 </Link>
               </div>
             )}

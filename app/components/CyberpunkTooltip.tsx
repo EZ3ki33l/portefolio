@@ -7,7 +7,7 @@ import { useCallback } from "react";
 interface CyberpunkTooltipProps {
   content: string;
   isVisible: boolean;
-  onMouseMove: (event: any) => void;
+  onMouseMove: (event: React.MouseEvent) => void;
 }
 
 export default function CyberpunkTooltip({ content, isVisible, onMouseMove }: CyberpunkTooltipProps) {

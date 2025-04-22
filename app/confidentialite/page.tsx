@@ -68,9 +68,9 @@ export default function ConfidentialitePage() {
                   Conformément au RGPD, vous disposez des droits suivants :
                 </p>
                 <ul className="list-disc pl-6 mt-2 space-y-2">
-                  <li>Droit d'accès à vos données</li>
+                  <li>Droit d&apos;accès à vos données</li>
                   <li>Droit de rectification</li>
-                  <li>Droit à l'effacement</li>
+                  <li>Droit à l&apos;effacement</li>
                   <li>Droit à la limitation du traitement</li>
                   <li>Droit à la portabilité des données</li>
                 </ul>

@@ -54,8 +54,8 @@ export default function Projets() {
     containScroll: "trimSnaps",
   });
 
-  const handleMouseMove = (event: any) => {
-    const halfWidth = event.target.offsetWidth / 2;
+  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+    const halfWidth = event.currentTarget.offsetWidth / 2;
     x.set(event.nativeEvent.offsetX - halfWidth);
   };
 
@@ -79,7 +79,7 @@ export default function Projets() {
 
         const reposData = await reposResponse.json();
         const reposWithLanguages = await Promise.all(
-          reposData.map(async (repo: any, index: number) => {
+          reposData.map(async (repo: GitHubRepo, index: number) => {
             const languagesResponse = await fetch(repo.languages_url);
             const languagesData: GitHubLanguages =
               await languagesResponse.json();

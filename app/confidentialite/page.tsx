@@ -38,7 +38,7 @@ export default function ConfidentialitePage() {
                 </p>
                 <ul className="list-disc pl-6 mt-2 space-y-2">
                   <li>Mémoriser la date de votre dernier message envoyé via le formulaire de contact</li>
-                  <li>Limiter l'envoi de messages à une fréquence raisonnable (1 message toutes les 12 heures)</li>
+                  <li>Limiter l&apos;envoi de messages à une fréquence raisonnable (1 message toutes les 12 heures)</li>
                 </ul>
                 <p className="mt-4">
                   Ces données sont stockées uniquement sur votre appareil et ne sont pas transmises à nos serveurs.

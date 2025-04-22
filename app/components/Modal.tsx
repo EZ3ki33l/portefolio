@@ -61,7 +61,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
             <div className="sm:flex sm:items-start">
               <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
                 <h3 className="text-4xl font-bold text-[#038C8C] text-center py-4 mb-6 relative">
-                  <span className="relative z-10">Mon Parcours Professionnel</span>
+                  <span className="relative z-10">{title}</span>
                   <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-[#BF0404]"></span>
                 </h3>
                 <div className="mt-2 overflow-y-auto max-h-[80vh] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">{children}</div>

@@ -7,7 +7,7 @@ import { CyberpunkClock } from "../components/ui/cyberpunk-clock";
 import { GlitchBackground } from "../components/ui/glitch-background";
 import useEmblaCarousel from "embla-carousel-react";
 import SkillBar from "../components/SkillBar";
-import { motion, useTransform, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import { useTransform, useMotionValue, useSpring } from "framer-motion";
 import CyberpunkTooltip from "../components/CyberpunkTooltip";
 
 interface GitHubLanguages {
@@ -46,8 +46,6 @@ export default function Projets() {
   const [hoveredRepoId, setHoveredRepoId] = useState<number | null>(null);
   const springConfig = { stiffness: 100, damping: 5 };
   const x = useMotionValue(0);
-  const rotate = useSpring(useTransform(x, [-100, 100], [-45, 45]), springConfig);
-  const translateX = useSpring(useTransform(x, [-100, 100], [-50, 50]), springConfig);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     slidesToScroll: 1,

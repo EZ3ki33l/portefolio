@@ -54,8 +54,9 @@ export default function Projets() {
     containScroll: "trimSnaps",
   });
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
-    const halfWidth = event.currentTarget.offsetWidth / 2;
+  const handleMouseMove = (event: React.MouseEvent) => {
+    const target = event.currentTarget as HTMLElement;
+    const halfWidth = target.offsetWidth / 2;
     x.set(event.nativeEvent.offsetX - halfWidth);
   };
 

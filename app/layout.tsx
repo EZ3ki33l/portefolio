@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import CookieConsent from "./components/CookieConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,7 +47,6 @@ export default function RootLayout({
     <html lang="fr" style={{ fontFamily: `${geistSans.style.fontFamily}, ${geistMono.style.fontFamily}` }}>
       <body className={`${geistSans.className} antialiased`}>
         {children}
-        <CookieConsent />
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CyberpunkButton } from "../components/ui/cyberpunk-button";
 import { GlitchBackground } from "../components/ui/glitch-background";
 import { CyberpunkClock } from "../components/ui/cyberpunk-clock";
@@ -25,6 +25,24 @@ export default function ContactPage() {
   const [notificationType, setNotificationType] = useState<'success' | 'error'>('success');
   const [notificationMessage, setNotificationMessage] = useState<React.ReactNode>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const cookieConsent = localStorage.getItem('cookieConsent');
+    if (cookieConsent === null) {
+      setNotificationType('success');
+      setNotificationMessage(
+        <span>
+          Par défaut, nous autorisons le traitement de vos données pour le formulaire de contact. 
+          Si vous ne souhaitez pas que vos données soient traitées, vous pouvez modifier vos préférences dans la 
+          <Link href="/confidentialite" className="text-[#038C8C] hover:underline ml-1">
+            page de confidentialité
+          </Link>
+        </span>
+      );
+      setShowNotification(true);
+      localStorage.setItem('cookieConsent', 'true');
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

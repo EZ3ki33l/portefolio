@@ -24,9 +24,9 @@ export default function Home() {
                 className="rounded-full"
               />
             </Link>
-            <h1 className="text-4xl font-bold text-center">
+            <h1 className="text-2xl md:text-4xl font-bold text-center">
               <div className="space-y-2">
-                <div className="page-subtitle">
+                <div className="page-subtitle text-lg md:text-xl">
                   BUONGIORNO !
                 </div>
                 <div className="page-title">
@@ -37,28 +37,28 @@ export default function Home() {
                     ROUSSET
                   </span>
                 </div>
-                <div className="page-subtitle">
+                <div className="page-subtitle text-lg md:text-xl">
                   WELCOME ON MY PORTFOLIO !
                 </div>
               </div>
             </h1>
-            <h2 className="text-xl text-gray-600 flex items-center gap-1">
+            <h2 className="text-base md:text-xl text-gray-600 flex items-center gap-1">
               <span>Full Stack Developer</span>
-              <span className="w-24">
+              <span className="w-20 md:w-24">
                 <FlipWords words={["React", "Angular", "Next.JS", "Nest.JS"]} />
               </span>
             </h2>
-            <div className="flex justify-center items-center space-x-4">
-              <Link href="/projets">
-                <CyberpunkButton variant="rounded">
+            <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+              <Link href="/projets" className="w-full md:w-auto">
+                <CyberpunkButton variant="rounded" className="w-full md:w-auto">
                   Voir mes projets
                 </CyberpunkButton>
               </Link>
-              <Link href="/cv">
-                <CyberpunkButton variant="rounded">Voir mon CV</CyberpunkButton>
+              <Link href="/cv" className="w-full md:w-auto">
+                <CyberpunkButton variant="rounded" className="w-full md:w-auto">Voir mon CV</CyberpunkButton>
               </Link>
-              <Link href="/contact">
-                <CyberpunkButton variant="rounded">
+              <Link href="/contact" className="w-full md:w-auto">
+                <CyberpunkButton variant="rounded" className="w-full md:w-auto">
                   Me contacter
                 </CyberpunkButton>
               </Link>

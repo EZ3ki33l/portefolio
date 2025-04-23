@@ -1,12 +1,91 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+
+// Configuration du rate limiting
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(5, '1 h'), // 5 requêtes par heure
+  analytics: true,
+});
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Fonction de validation des entrées
+function validateInput(data: any) {
+  // Vérification des champs requis
+  if (!data.nom || !data.prenom || !data.email || !data.motif || !data.message) {
+    return { isValid: false, error: 'Tous les champs obligatoires doivent être remplis.' };
+  }
+
+  // Validation des longueurs
+  if (data.nom.length > 100 || data.prenom.length > 100 || 
+      data.email.length > 255 || (data.societe && data.societe.length > 100) || 
+      data.message.length > 2000) {
+    return { isValid: false, error: 'Certains champs dépassent la longueur maximale autorisée.' };
+  }
+
+  // Validation du format d'email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(data.email)) {
+    return { isValid: false, error: 'Format d\'email invalide.' };
+  }
+
+  // Validation des caractères autorisés pour le nom et prénom
+  const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
+  if (!nameRegex.test(data.nom) || !nameRegex.test(data.prenom)) {
+    return { isValid: false, error: 'Le nom et le prénom contiennent des caractères non autorisés' };
+  }
+
+  // Validation du message contre les injections
+  const messageRegex = /^[a-zA-ZÀ-ÿ0-9\s.,!?()'"-]+$/;
+  if (!messageRegex.test(data.message)) {
+    return { isValid: false, error: 'Le message contient des caractères non autorisés' };
+  }
+
+  // Validation des motifs autorisés
+  const allowedMotifs = ['projet', 'emploi', 'collaboration', 'autre'];
+  if (!allowedMotifs.includes(data.motif)) {
+    return { isValid: false, error: 'Motif de contact invalide.' };
+  }
+
+  // Vérification du timestamp (pour éviter les soumissions trop rapides)
+  if (data.timestamp) {
+    const submissionTime = new Date(data.timestamp).getTime();
+    const now = new Date().getTime();
+    if (now - submissionTime < 1000) { // 1 seconde minimum entre les soumissions
+      return { isValid: false, error: 'Soumission trop rapide.' };
+    }
+  }
+
+  return { isValid: true };
+}
+
 export async function POST(request: Request) {
   try {
+    // Vérification du rate limiting
+    const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
+    const { success } = await ratelimit.limit(ip);
+    
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Trop de tentatives. Veuillez réessayer plus tard.' },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
-    const { nom, prenom, email, societe, motif, message } = body;
+    const { nom, prenom, email, societe, motif, message, timestamp } = body;
+
+    // Validation des entrées
+    const validation = validateInput(body);
+    if (!validation.isValid) {
+      return NextResponse.json(
+        { error: validation.error },
+        { status: 400 }
+      );
+    }
 
     const data = await resend.emails.send({
       from: 'Portfolio <onboarding@resend.dev>',
@@ -86,6 +165,10 @@ export async function POST(request: Request) {
 
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ error });
+    console.error('Erreur lors de l\'envoi de l\'email:', error);
+    return NextResponse.json(
+      { error: 'Une erreur est survenue lors de l\'envoi du message.' },
+      { status: 500 }
+    );
   }
 } 

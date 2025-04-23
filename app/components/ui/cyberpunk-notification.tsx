@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface CyberpunkNotificationProps {
-  message: string;
+  message: React.ReactNode;
   type: 'success' | 'error';
   onClose: () => void;
   duration?: number;
@@ -55,7 +55,7 @@ export const CyberpunkNotification: React.FC<CyberpunkNotificationProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
-          className={`relative mt-4 p-4 rounded-lg shadow-lg border-2 ${
+          className={`relative p-2 rounded-lg shadow-lg border-2 max-w-6xl mx-auto ${
             type === 'success' ? 'border-[#038C8C]' : 'border-red-500'
           } bg-white/90 backdrop-blur-sm ${glitch ? 'cyberpunk-notification-glitch' : ''}`}
         >

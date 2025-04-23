@@ -165,11 +165,11 @@ export default function CV() {
               </div>
             </header>
 
-            <div className="grid grid-cols-1 gap-8">
-              <section className="bg-white border border-[#025959] rounded-2xl p-8 shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-                <h2 className="text-3xl font-bold text-[#038C8C] mb-6 flex items-center">
+            <div className="grid grid-cols-1 gap-4 md:gap-8">
+              <section className="bg-white border border-[#025959] rounded-2xl p-4 md:p-8 shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#038C8C] mb-4 md:mb-6 flex items-center">
                   <svg
-                    className="w-8 h-8 mr-3 text-[#BF0404]"
+                    className="w-6 h-6 md:w-8 md:h-8 mr-2 md:mr-3 text-[#BF0404]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -183,7 +183,7 @@ export default function CV() {
                   </svg>
                   Mes Compétences
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                   <div>
                     <h3 className="text-xl font-semibold text-[#038C8C] mb-4">
                       Compétences Techniques
@@ -212,11 +212,11 @@ export default function CV() {
                 </div>
               </section>
 
-              <section className="bg-white border border-[#025959] rounded-2xl p-8 shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-3xl font-bold text-[#038C8C] flex items-center">
+              <section className="bg-white border border-[#025959] rounded-2xl p-4 md:p-8 shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-6 gap-2">
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#038C8C] flex items-center">
                     <svg
-                      className="w-7 h-7 mr-3 text-[#BF0404]"
+                      className="w-6 h-6 md:w-7 md:h-7 mr-2 md:mr-3 text-[#BF0404]"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -234,11 +234,11 @@ export default function CV() {
                 <CyberpunkTimelineFormation formations={formations} />
               </section>
 
-              <section className="bg-white border border-[#025959] rounded-2xl p-8 shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-3xl font-bold text-[#038C8C] flex items-center">
+              <section className="bg-white border border-[#025959] rounded-2xl p-4 md:p-8 shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-6 gap-2">
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#038C8C] flex items-center">
                     <svg
-                      className="w-7 h-7 mr-3 text-[#BF0404]"
+                      className="w-6 h-6 md:w-7 md:h-7 mr-2 md:mr-3 text-[#BF0404]"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -257,7 +257,7 @@ export default function CV() {
                   </CyberpunkButton>
                 </div>
                 <CyberpunkTimeline experiences={experiences.slice(0, 3)} />
-                <div className="flex justify-center -mt-7 pb-3">
+                <div className="flex justify-center -mt-4 md:-mt-7 pb-3">
                   <CyberpunkButton variant="rounded" size="extra-small" onClick={() => setShowExperiences(true)}>
                     Voir toutes mes expériences
                   </CyberpunkButton>

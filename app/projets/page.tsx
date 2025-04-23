@@ -121,7 +121,7 @@ export default function Projets() {
   const renderProjects = () => {
     if (repos.length <= 3) {
       return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {repos.map((repo) => (
             <div key={`grid-${repo.name}`} className="p-2">
               {renderProjectCard(repo)}
@@ -132,13 +132,13 @@ export default function Projets() {
     }
 
     return (
-      <div className="relative px-8">
+      <div className="relative px-4 sm:px-8">
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
             {repos.map((repo, index) => (
               <div
                 key={`carousel-${repo.name}-${index}`}
-                className="flex-[0_0_calc(100%/3)] min-w-0 p-2"
+                className="flex-[0_0_100%] sm:flex-[0_0_calc(100%/2)] lg:flex-[0_0_calc(100%/3)] min-w-0 p-2"
               >
                 {renderProjectCard(repo)}
               </div>
@@ -146,7 +146,7 @@ export default function Projets() {
           </div>
         </div>
         <button
-          className="absolute top-1/2 -left-4 -translate-y-1/2 bg-[#038C8C] text-white p-2 rounded-full hover:bg-[#BF0404] transition-colors z-10"
+          className="absolute top-1/2 -left-2 sm:-left-4 -translate-y-1/2 bg-[#038C8C] text-white p-2 rounded-full hover:bg-[#BF0404] transition-colors z-10"
           onClick={scrollPrev}
         >
           <svg
@@ -164,7 +164,7 @@ export default function Projets() {
           </svg>
         </button>
         <button
-          className="absolute top-1/2 -right-4 -translate-y-1/2 bg-[#038C8C] text-white p-2 rounded-full hover:bg-[#BF0404] transition-colors z-10"
+          className="absolute top-1/2 -right-2 sm:-right-4 -translate-y-1/2 bg-[#038C8C] text-white p-2 rounded-full hover:bg-[#BF0404] transition-colors z-10"
           onClick={scrollNext}
         >
           <svg

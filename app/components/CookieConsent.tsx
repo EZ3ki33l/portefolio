@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { CyberpunkNotification } from './ui/cyberpunk-notification';
 import Link from 'next/link';
 import { CyberpunkButton } from './ui/cyberpunk-button';
 

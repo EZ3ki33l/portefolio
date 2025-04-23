@@ -50,14 +50,14 @@ export default function ConfidentialitePage() {
 
             <div className="space-y-6 text-gray-700">
               <section>
-                <h2 className="text-2xl font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">1. Introduction</h2>
+                <h2 className="font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">1. Introduction</h2>
                 <p>
                   Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos données personnelles lorsque vous utilisez notre site web.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">2. Gestion du Consentement</h2>
+                <h2 className="font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">2. Gestion du Consentement</h2>
                 <div className="bg-gray-50 p-6 rounded-lg border border-[#038C8C]">
                   <h3 className="text-xl font-semibold text-[#038C8C] mb-4">Vos préférences actuelles</h3>
                   <p className="mb-4">
@@ -90,10 +90,10 @@ export default function ConfidentialitePage() {
                   Notre site utilise le stockage local du navigateur (localStorage) uniquement pour :
                 </p>
                 <ul className="list-disc pl-6 mt-2 space-y-2">
-                  <li>Mémoriser votre choix concernant l'utilisation de vos données personnelles</li>
+                  <li>Mémoriser votre choix concernant l&apos;utilisation de vos données personnelles</li>
                 </ul>
                 <p className="mt-4">
-                  Cette donnée est stockée uniquement sur votre appareil et n'est pas transmise à nos serveurs.
+                  Cette donnée est stockée uniquement sur votre appareil et n&apos;est pas transmise à nos serveurs.
                 </p>
                 <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-[#038C8C]">
                   <h4 className="text-lg font-semibold text-[#038C8C] mb-2">Conséquences du refus</h4>
@@ -112,22 +112,22 @@ export default function ConfidentialitePage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">3. Protection contre les abus</h2>
+                <h2 className="font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">3. Protection contre les abus</h2>
                 <p>
                   Pour protéger notre formulaire de contact contre les abus et les attaques, nous utilisons un service de rate limiting (Upstash) qui :
                 </p>
                 <ul className="list-disc pl-6 mt-2 space-y-2">
-                  <li>Limite le nombre de messages qu'une adresse IP peut envoyer dans un délai donné</li>
-                  <li>Protège contre les tentatives de spam et d'attaques par force brute</li>
+                  <li>Limite le nombre de messages qu&apos;une adresse IP peut envoyer dans un délai donné</li>
+                  <li>Protège contre les tentatives de spam et d&apos;attaques par force brute</li>
                   <li>Assure la disponibilité du service pour tous les utilisateurs légitimes</li>
                 </ul>
                 <p className="mt-4">
-                  Les données de rate limiting sont stockées de manière sécurisée sur les serveurs d'Upstash et sont automatiquement supprimées après une période définie.
+                  Les données de rate limiting sont stockées de manière sécurisée sur les serveurs d&apos;Upstash et sont automatiquement supprimées après une période définie.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">4. Formulaire de Contact</h2>
+                <h2 className="font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">4. Formulaire de Contact</h2>
                 <p>
                   Lorsque vous utilisez notre formulaire de contact, nous collectons les informations suivantes :
                 </p>
@@ -144,7 +144,7 @@ export default function ConfidentialitePage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">5. Vos Droits</h2>
+                <h2 className="font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">5. Vos Droits</h2>
                 <p>
                   Conformément au RGPD, vous disposez des droits suivants :
                 </p>
@@ -158,14 +158,14 @@ export default function ConfidentialitePage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">6. Contact</h2>
+                <h2 className="font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">6. Contact</h2>
                 <p>
                   Pour toute question concernant cette politique de confidentialité ou pour exercer vos droits, vous pouvez nous contacter via le formulaire de contact disponible sur notre site.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">7. Modifications</h2>
+                <h2 className="font-bold text-[#038C8C] mb-4 sm:text-2xl text-xl">7. Modifications</h2>
                 <p>
                   Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. Les modifications prendront effet dès leur publication sur le site.
                 </p>

@@ -12,8 +12,18 @@ const ratelimit = new Ratelimit({
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+interface ContactFormData {
+  nom: string;
+  prenom: string;
+  email: string;
+  societe?: string;
+  motif: string;
+  message: string;
+  timestamp?: string;
+}
+
 // Fonction de validation des entrées
-function validateInput(data: any) {
+function validateInput(data: ContactFormData) {
   // Vérification des champs requis
   if (!data.nom || !data.prenom || !data.email || !data.motif || !data.message) {
     return { isValid: false, error: 'Tous les champs obligatoires doivent être remplis.' };
@@ -76,7 +86,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { nom, prenom, email, societe, motif, message, timestamp } = body;
+    const { nom, prenom, email, societe, motif, message } = body;
 
     // Validation des entrées
     const validation = validateInput(body);

@@ -82,6 +82,14 @@ export default function Navbar() {
                   Accueil
                 </Link>
                 <Link
+                  href="/a-propos"
+                  className="cyberpunk-menu-link text-sm sm:text-base"
+                  onClick={() => setIsMenuOpen(false)}
+                  role="menuitem"
+                >
+                  A propos
+                </Link>
+                <Link
                   href="/cv"
                   className="cyberpunk-menu-link text-sm sm:text-base"
                   onClick={() => setIsMenuOpen(false)}
